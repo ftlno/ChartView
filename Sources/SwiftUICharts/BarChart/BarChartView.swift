@@ -35,7 +35,7 @@ public struct BarChartView: View {
         return formSize == ChartForm.large
     }
 
-    public init(data: ChartData, title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, cornerImage: Image? = Image(systemName: "waveform.path.ecg"), valueSpecifier: String? = "%.1f") {
+    public init(data: ChartData, title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, cornerImage _: Image? = Image(systemName: "waveform.path.ecg"), valueSpecifier: String? = "%.1f") {
         self.data = data
         self.title = title
         self.legend = legend
@@ -43,7 +43,6 @@ public struct BarChartView: View {
         darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.barChartStyleOrangeDark
         formSize = form!
         self.dropShadow = dropShadow!
-        self.cornerImage = cornerImage!
         self.valueSpecifier = valueSpecifier!
     }
 
@@ -58,7 +57,7 @@ public struct BarChartView: View {
                             .font(.headline)
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     } else {
-                        Text("\(self.currentValue, specifier: self.valueSpecifier)")
+                        Text("\(self.legend!, specifier: self.valueSpecifier)")
                             .font(.headline)
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
@@ -69,10 +68,6 @@ public struct BarChartView: View {
                             .transition(.opacity)
                             .animation(.easeOut)
                     }
-                    Spacer()
-                    self.cornerImage
-                        .imageScale(.large)
-                        .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.legendTextColor : self.style.legendTextColor)
                 }.padding()
                 BarChartRow(data: data.points.map { $0.1 },
                             accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
