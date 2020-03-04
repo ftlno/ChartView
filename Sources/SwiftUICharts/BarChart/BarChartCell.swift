@@ -24,7 +24,7 @@ public struct BarChartCell : View {
     public var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 4)
-                .fill(LinearGradient(gradient: gradient?.getGradient() ?? GradientColor(start: accentColor, end: accentColor).getGradient(), startPoint: .bottom, endPoint: .top))
+                .fill(LinearGradient(gradient: GradientColors.blue.getGradient(), startPoint: .bottom, endPoint: .top))
             }
             .frame(width: CGFloat(self.cellWidth))
             .scaleEffect(CGSize(width: 1, height: self.scaleValue), anchor: .bottom)
