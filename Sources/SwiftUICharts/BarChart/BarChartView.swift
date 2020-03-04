@@ -93,6 +93,7 @@ public struct BarChartView: View {
                     self.touchLocation = value.location.x / self.formSize.width
                     self.showValue = true
                     self.currentValue = self.getCurrentValue()?.1 ?? 0
+                    self.legend = self.getCurrentValue()!.0
                     if self.data.valuesGiven, self.formSize == ChartForm.medium {
                         self.showLabelValue = true
                     }
