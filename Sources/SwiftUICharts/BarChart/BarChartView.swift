@@ -17,7 +17,6 @@ public struct BarChartView: View {
     public var darkModeStyle: ChartStyle
     public var formSize: CGSize
     public var dropShadow: Bool
-    public var cornerImage: Image
     public var valueSpecifier: String
 
     @State private var touchLocation: CGFloat = -1.0
