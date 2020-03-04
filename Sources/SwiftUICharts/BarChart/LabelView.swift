@@ -23,7 +23,7 @@ struct LabelView: View {
     }
 
     func getArrowOffset(offset: CGFloat) -> CGFloat {
-        return max(-10, min(10, offset))
+        return max(-250, min(10, offset))
     }
 }
 
