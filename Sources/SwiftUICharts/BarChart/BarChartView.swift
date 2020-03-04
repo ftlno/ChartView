@@ -104,7 +104,7 @@ public struct BarChartView: View {
 
     func getLabelViewOffset(touchLocation _: CGFloat) -> CGFloat {
         // return min(formSize.width - 110, max(10, (touchLocation * formSize.width) - 50))
-        return min(formSize.width, max(10, formSize.width))
+        return min(formSize.width - 50, max(10, (touchLocation * formSize.width) - 50))
     }
 
     func getCurrentValue() -> (String, Double)? {
