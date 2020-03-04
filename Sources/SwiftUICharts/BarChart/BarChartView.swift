@@ -51,24 +51,6 @@ public struct BarChartView: View {
             Rectangle()
                 .fill(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
             VStack(alignment: .leading) {
-                HStack {
-                    if !showValue {
-                        Text(self.title)
-                            .font(.headline)
-                            .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
-                    } else {
-                        Text(self.currentLabelVerbose)
-                            .font(.headline)
-                            .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
-                    }
-                    if self.formSize == ChartForm.large && self.legend != nil && !showValue {
-                        Text(self.legend!)
-                            .font(.callout)
-                            .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor)
-                            .transition(.opacity)
-                            .animation(.easeOut)
-                    }
-                }.padding()
                 BarChartRow(data: data.points.map { $0.1 },
                             accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
                             gradient: self.colorScheme == .dark ? self.darkModeStyle.gradientColor : self.style.gradientColor,
@@ -121,7 +103,8 @@ public struct BarChartView: View {
     }
 
     func getLabelViewOffset(touchLocation _: CGFloat) -> CGFloat {
-        return min(formSize.width - 110, max(10, (touchLocation * formSize.width) - 50))
+        // return min(formSize.width - 110, max(10, (touchLocation * formSize.width) - 50))
+        return min(formSize.width, max(10, (touchLocation * formSize.width) - 50))
     }
 
     func getCurrentValue() -> (String, Double)? {
