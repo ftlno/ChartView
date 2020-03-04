@@ -52,9 +52,10 @@ public struct BarChartView: View {
                 .fill(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
             VStack(alignment: .leading) {
                 BarChartRow(data: data.points.map { $0.1 },
-                            accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
+                            values: data.points.map { $0.0 }, accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
                             gradient: self.colorScheme == .dark ? self.darkModeStyle.gradientColor : self.style.gradientColor,
-                            touchLocation: self.$touchLocation)
+                            touchLocation: self.$touchLocation
+                            )
                 if self.legend != nil && self.formSize == ChartForm.medium && !self.showLabelValue {
                     Text(self.legend!)
                         .font(.headline)
