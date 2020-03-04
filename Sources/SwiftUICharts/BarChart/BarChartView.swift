@@ -22,6 +22,7 @@ public struct BarChartView: View {
     @State private var touchLocation: CGFloat = -1.0
     @State private var showValue: Bool = false
     @State private var showLabelValue: Bool = false
+    @State private var currentLabelVerbose: String = ""
     @State private var currentValue: Double = 0 {
         didSet {
             if oldValue != self.currentValue && self.showValue {
@@ -56,7 +57,7 @@ public struct BarChartView: View {
                             .font(.headline)
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     } else {
-                        Text(self.legend!)
+                        Text(self.currentLabelVerbose)
                             .font(.headline)
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
@@ -93,7 +94,7 @@ public struct BarChartView: View {
                     self.touchLocation = value.location.x / self.formSize.width
                     self.showValue = true
                     self.currentValue = self.getCurrentValue()?.1 ?? 0
-                    self.legend = self.getCurrentValue()!.0
+                    self.currentLabelVerbose = self.getCurrentValue()!.0
                     if self.data.valuesGiven, self.formSize == ChartForm.medium {
                         self.showLabelValue = true
                     }
