@@ -105,7 +105,7 @@ public struct BarChartView: View {
         )
     }
     
-    unc getArrowOffset(touchLocation:CGFloat) -> Binding<CGFloat> {
+    func getArrowOffset(touchLocation:CGFloat) -> Binding<CGFloat> {
         let realLoc = (self.touchLocation * self.formSize.width) - 50
         if realLoc < 10 {
             return .constant(realLoc - 10)
