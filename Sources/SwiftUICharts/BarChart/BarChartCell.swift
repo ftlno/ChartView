@@ -10,6 +10,7 @@ import SwiftUI
 
 public struct BarChartCell : View {
     var value: Double
+    var color: Int
     var verbose: String
     var index: Int = 0
     var width: Float
@@ -25,9 +26,9 @@ public struct BarChartCell : View {
     @Binding var touchLocation: CGFloat
     
     func getColumnGradient() -> LinearGradient{
-        if(self.verbose.contains("bottle")){
+        if(self.color == 1){
             return LinearGradient(gradient: GradientColors.blue.getGradient(), startPoint: .bottom, endPoint: .top)
-        }else if(self.verbose.contains("right")){
+        }else if(self.color == 2){
             return LinearGradient(gradient: GradientColors.green.getGradient(), startPoint: .bottom, endPoint: .top)
         }else{
             return LinearGradient(gradient: GradientColors.orange.getGradient(), startPoint: .bottom, endPoint: .top)
@@ -51,7 +52,7 @@ public struct BarChartCell : View {
 #if DEBUG
 struct ChartCell_Previews : PreviewProvider {
     static var previews: some View {
-        BarChartCell(value: Double(0.75), verbose: "", width: 320, numberOfDataPoints: 12, accentColor: Colors.OrangeStart, columnColor: "blue", gradient: nil, touchLocation: .constant(-1))
+        BarChartCell(value: Double(0.75), color: 0, verbose: "", width: 320, numberOfDataPoints: 12, accentColor: Colors.OrangeStart, columnColor: "blue", gradient: nil, touchLocation: .constant(-1))
     }
 }
 #endif

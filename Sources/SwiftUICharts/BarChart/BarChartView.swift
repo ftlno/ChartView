@@ -11,6 +11,7 @@ import SwiftUI
 public struct BarChartView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     private var data: ChartData
+    private var colors: [Int]
     public var title: String
     public var legend: String?
     public var style: ChartStyle
@@ -35,8 +36,9 @@ public struct BarChartView: View {
         return formSize == ChartForm.large
     }
     
-    public init(data: ChartData, title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, cornerImage _: Image? = Image(systemName: "waveform.path.ecg"), valueSpecifier: String? = "%.1f") {
+    public init(data: ChartData, colors: [Int], title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, cornerImage _: Image? = Image(systemName: "waveform.path.ecg"), valueSpecifier: String? = "%.1f") {
         self.data = data
+        self.colors = colors
         self.title = title
         self.legend = legend
         self.style = style
@@ -65,7 +67,9 @@ public struct BarChartView: View {
                 }.padding()
                 
                 BarChartRow(data: data.points.map { $0.1 },
-                            values: data.points.map { $0.0 }, accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
+                            values: data.points.map { $0.0 },
+                            colors: colors,
+                            accentColor: self.colorScheme == .dark ? self.darkModeStyle.accentColor : self.style.accentColor,
                             gradient: self.colorScheme == .dark ? self.darkModeStyle.gradientColor : self.style.gradientColor,
                             touchLocation: self.$touchLocation
                 )
@@ -130,7 +134,7 @@ public struct BarChartView: View {
 #if DEBUG
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        BarChartView(data: TestData.values,
+        BarChartView(data: TestData.values, colors: [],
                      title: "Model 3 sales",
                      legend: "Quarterly",
                      valueSpecifier: "%.0f")

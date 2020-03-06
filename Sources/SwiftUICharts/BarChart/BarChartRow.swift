@@ -11,6 +11,7 @@ import SwiftUI
 public struct BarChartRow : View {
     var data: [Double]
     var values: [String]
+    var colors: [Int]
     var accentColor: Color
     var gradient: GradientColor?
     var maxValue: Double {
@@ -24,7 +25,7 @@ public struct BarChartRow : View {
             HStack(alignment: .bottom, spacing: (geometry.frame(in: .local).width-22)/CGFloat(self.data.count * 3)){
                 ForEach(0..<self.data.count, id: \.self) { i in
                     BarChartCell(value: self.normalizedValue(index: i),
-                                 verbose: self.values[i],
+                                 color: self.colors[i], verbose: self.values[i],
                                  width: Float(geometry.frame(in: .local).width - 22),
                                  numberOfDataPoints: self.data.count,
                                  accentColor: self.accentColor,
@@ -48,7 +49,7 @@ public struct BarChartRow : View {
 #if DEBUG
 struct ChartRow_Previews : PreviewProvider {
     static var previews: some View {
-        BarChartRow(data: [8,23,54,32,12,37,7], values: ["","","","","","",""], accentColor: Colors.OrangeStart, touchLocation: .constant(-1) )
+        BarChartRow(data: [8,23,54,32,12,37,7], values: ["","","","","","",""], colors: [], accentColor: Colors.OrangeStart, touchLocation: .constant(-1) )
     }
 }
 #endif
