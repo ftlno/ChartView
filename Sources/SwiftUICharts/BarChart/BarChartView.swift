@@ -66,7 +66,7 @@ public struct BarChartView: View {
                             .font(.system(size: 40))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }else{
-                        Text("\(doubleToInteger(self.currentValue), specifier: self.valueSpecifier)")
+                        Text("\(doubleToInteger(data:self.currentValue), specifier: self.valueSpecifier)")
                             .font(.system(size: 40))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
