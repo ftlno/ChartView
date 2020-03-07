@@ -48,6 +48,13 @@ public struct BarChartView: View {
         self.valueSpecifier = valueSpecifier!
     }
     
+    func doubleToInteger(data:Double)-> Int {
+        let doubleToString = "\(data)"
+        let stringToInteger = (doubleToString as NSString).integerValue
+        
+        return stringToInteger
+    }
+    
     public var body: some View {
         ZStack {
             Rectangle()
@@ -56,11 +63,11 @@ public struct BarChartView: View {
                 HStack{
                     if(!showValue){
                         Text(self.title)
-                            .font(.headline)
+                            .font(.system(size: 40))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }else{
-                        Text("\(self.currentValue, specifier: self.valueSpecifier)")
-                            .font(.headline)
+                        Text("\(doubleToInteger(self.currentValue), specifier: self.valueSpecifier)")
+                            .font(.system(size: 40))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
                     Spacer()
