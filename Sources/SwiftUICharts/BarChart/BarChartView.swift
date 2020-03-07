@@ -53,11 +53,11 @@ public struct BarChartView: View {
                 HStack{
                     if(!showValue){
                         Text(self.title)
-                            .font(.system(size: 30))
+                            .font(.system(size: 20))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }else{
                         Text("\(Int(self.currentValue))")
-                            .font(.system(size: 30))
+                            .font(.system(size: 20))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
                     Spacer()
