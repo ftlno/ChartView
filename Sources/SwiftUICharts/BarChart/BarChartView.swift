@@ -23,7 +23,6 @@ public struct BarChartView: View {
     @State private var touchLocation: CGFloat = -1.0
     @State private var showValue: Bool = false
     @State private var showLabelValue: Bool = false
-    @State private var currentLabelVerbose: String = ""
     @State private var currentValue: Double = 0 {
         didSet {
             if oldValue != self.currentValue && self.showValue {
@@ -48,13 +47,6 @@ public struct BarChartView: View {
         self.valueSpecifier = valueSpecifier!
     }
     
-    func doubleToInteger(data:Double)-> Int {
-        let doubleToString = "\(data)"
-        let stringToInteger = (doubleToString as NSString).integerValue
-        
-        return stringToInteger
-    }
-    
     public var body: some View {
         ZStack {
             Rectangle()
@@ -63,11 +55,11 @@ public struct BarChartView: View {
                 HStack{
                     if(!showValue){
                         Text(self.title)
-                            .font(.system(size: 40))
+                            .font(.system(size: 30))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }else{
-                        Text("\(doubleToInteger(data:self.currentValue), specifier: self.valueSpecifier)")
-                            .font(.system(size: 40))
+                        Text("\(self.currentValue), specifier: self.valueSpecifier)")
+                            .font(.system(size: 30))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
                     Spacer()
@@ -101,7 +93,6 @@ public struct BarChartView: View {
                     self.touchLocation = value.location.x / self.formSize.width
                     self.showValue = true
                     self.currentValue = self.getCurrentValue()?.1 ?? 0
-                    self.currentLabelVerbose = self.getCurrentValue()!.0
                     if self.data.valuesGiven, self.formSize == ChartForm.medium {
                         self.showLabelValue = true
                     }
