@@ -18,7 +18,6 @@ public struct BarChartView: View {
     public var darkModeStyle: ChartStyle
     public var formSize: CGSize
     public var dropShadow: Bool
-    public var valueSpecifier: String
     
     @State private var touchLocation: CGFloat = -1.0
     @State private var showValue: Bool = false
@@ -35,7 +34,7 @@ public struct BarChartView: View {
         return formSize == ChartForm.large
     }
     
-    public init(data: ChartData, colors: [Int], title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true, cornerImage _: Image? = Image(systemName: "waveform.path.ecg"), valueSpecifier: String? = "%.1f") {
+    public init(data: ChartData, colors: [Int], title: String, legend: String? = nil, style: ChartStyle = Styles.barChartStyleOrangeLight, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true) {
         self.data = data
         self.colors = colors
         self.title = title
@@ -44,7 +43,6 @@ public struct BarChartView: View {
         darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.barChartStyleOrangeDark
         formSize = form!
         self.dropShadow = dropShadow!
-        self.valueSpecifier = valueSpecifier!
     }
     
     public var body: some View {
@@ -58,7 +56,7 @@ public struct BarChartView: View {
                             .font(.system(size: 30))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }else{
-                        Text("\(self.currentValue), specifier: self.valueSpecifier)")
+                        Text("\(Int(self.currentValue))")
                             .font(.system(size: 30))
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
                     }
@@ -134,8 +132,7 @@ struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         BarChartView(data: TestData.values, colors: [],
                      title: "Model 3 sales",
-                     legend: "Quarterly",
-                     valueSpecifier: "%.0f")
+                     legend: "Quarterly")
     }
 }
 #endif
